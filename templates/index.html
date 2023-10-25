@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Lato Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Material Sysmbols -->
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
+
+</head>
+
+<body>
+    <div class="grid-container">
+        <!-- Header -->
+        <header class="header">
+
+            <div class="menu-icon" onclick="openSidebar()">
+                <span class="material-symbols-outlined">menu</span> 
+             </div>
+            <div class="header-left">
+                <span class="material-symbols-outlined">search</span>
+            </div>
+            <div class="header-right">
+                <span class="material-icons-outlined">notifications</span>
+                <span class="material-icons-outlined">email</span>
+                <span class="material-icons-outlined">account_circle</span>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-title">
+                <div class="sidebar-brand">
+                    <span class="material-symbols-outlined">crowdsource</span> Farm's inventory
+                </div>
+                <span class="material-symbols-outlined" onclick="closeSidebar ()">close</span>
+            </div>
+
+            <ul class="sidebar-list">
+                <li class="sidebar-list-item">
+                    <span class="material-symbols-outlined">search</span> Dashboard
+                </li>
+                <li class="sidebar-list-item">
+                    <span class="material-symbols-outlined">inventory_2 </span> Products
+                </li>
+                <li class="sidebar-list-item">
+                    <span class="material-symbols-outlined">bar_chart</span> Report
+                </li>
+                <li class="sidebar-list-item">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </li>
+            </ul>
+        </aside>
+        <!-- End Sidebar -->
+
+        <!-- Main -->
+        <main class="main-container">
+            <div class="main-title">
+                <p class="font-weight-bold">INVENTORY</p>
+            </div>
+
+            <div class="main-cards">
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p>PRODUCTS</p>
+                        <div class=" icon icon-shape background-blue text-primary">
+                            <span class="material-icons-outlined">inventory_2</span>
+                        </div>
+                    </div>
+                    <span class="text-primary">434</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p>SALE</p>
+                        <div class=" icon icon-shape background-blue text-primary">
+                            <span class="material-icons-outlined">add_shopping_cart</span>
+                        </div>
+                    </div>
+                    <span class="text-primary">242</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p>TRADES</p>
+                        <div class=" icon icon-shape background-blue text-primary">
+                            <span class="material-icons-outlined">agriculture</span>
+                        </div>
+                    </div>
+                    <span class="text-primary">126</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p>BRGY</p>
+                        <div class=" icon icon-shape background-blue text-primary">
+                            <span class="material-icons-outlined"> holiday_village </span>
+                        </div>
+                    </div>
+                    <span class="text-primary">942</span>
+                </div>
+            </div>
+
+            <div class="charts">
+
+                <div class="charts-card">
+                    <p class="chart-title">BRGY SALES</p>
+                    <div id="bar-chart"></div>
+                </div>
+
+                <div class="charts-card">
+                    <p class="chart-title">Purchase and Sales Orders</p>
+                    <div id="area-chart"></div>
+                </div>
+
+                <div class="charts-card">
+                    <p class="chart-title">Sale Statistics</p>
+                    <div id="radar-chart"></div>
+                </div>
+
+            </div>
+        </main>
+     
+        <!-- End Main -->
+    </div> 
+
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+
+</html>
