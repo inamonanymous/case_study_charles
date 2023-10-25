@@ -7,7 +7,7 @@ bar_chart_data = {
     "Rice": [10, 20, 15, 25, 30, 18, 12, 24, 16],
     "Sugar": [5, 15, 10, 20, 25, 12, 8, 22, 14],
     "Oil": [8, 18, 13, 23, 28, 15, 10, 20, 12],
-    "Vegetable": [12, 22, 17, 27, 32, 20, 14, 26, 18]
+    "Vegetable": [12, 22, 17, 37, 32, 20, 14, 26, 18]
 }
 
 # Include the x-axis categories in the API response
