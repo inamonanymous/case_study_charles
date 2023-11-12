@@ -1,0 +1,95 @@
+
+    <style>
+        /* Add your CSS styles here to match the theme of your dashboard */
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Add styles for the navigation sidebar if it's part of the page */
+.sidebar {
+    /* Your sidebar styles here */
+}
+
+/* Styles for the content area */
+.content {
+    margin-left: 250px; /* Or the width of your sidebar */
+    padding: 20px;
+}
+
+/* Styles for form inputs and buttons */
+input[type="text"],
+input[type="number"],
+button {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #5cb85c; /* Bootstrap 'success' green */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+    </style>
+    
+
+
+    <div class="content">
+        <h1>Manage Products</h1>
+        
+        <!-- Section for adding products -->
+        <div class="add-product">
+            <h2>Add Product</h2>
+            <form id="add-product-form">
+                <input type="text" placeholder="Product Name" required>
+                <input type="number" placeholder="Price" required>
+                <!-- Add other product details here -->
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+
+        <!-- Section for listing and deleting products -->
+        <div class="delete-product">
+            <h2>Current Products</h2>
+            <ul id="product-list">
+                <!-- Product items will be listed here -->
+                <!-- Example: <li>Product Name <button>Delete</button></li> -->
+            </ul>
+        </div>
+
+        <!-- Section for adding trades -->
+        <div class="add-trade">
+            <h2>Add Trade</h2>
+            <form id="add-trade-form">
+                <input type="text" placeholder="Trade Name" required>
+                <input type="number" placeholder="Quantity" required>
+                <!-- Add other trade details here -->
+                <button type="submit">Add Trade</button>
+            </form>
+        </div>
+
+        <!-- Section for listing and deleting trades -->
+        <div class="delete-trade">
+            <h2>Current Trades</h2>
+            <ul id="trade-list">
+                <!-- Trade items will be listed here -->
+                <!-- Example: <li>Trade Name <button>Delete</button></li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for form handling and dynamic product/trade management
+    </script>
+

@@ -1,24 +1,31 @@
-// SIDEBAR TOGGLE
+function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('sidebar-responsive');
+}
+
+// If sidebar-responsive is the class that shows the sidebar, this function will work.
+// Ensure that the sidebar has the correct styles for the sidebar-responsive class in your CSS.
 
 document.addEventListener("DOMContentLoaded", function () {
-  // SIDEBAR TOGGLE
+  // Attach the toggle function to the menu icon and close icon
+  document.querySelector('.menu-icon').addEventListener('click', toggleSidebar);
+  document.querySelector('.sidebar-title .material-symbols-outlined').addEventListener('click', toggleSidebar);
 
-  var sidebarOpen = false;
-  var sidebar = document.getElementById('sidebar');
+  // Add functionality for sidebar list items to toggle content
+  var sidebarListItems = document.querySelectorAll('.sidebar-list-item');
+  sidebarListItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      // Assuming that you have the data-target attribute set correctly on your list items
+      var contentId = item.getAttribute('data-target');
+      var contentDivs = document.querySelectorAll('.content-div');
 
-  function openSidebar() {
-      if (!sidebarOpen) {
-          sidebar.classList.add('sidebar-responsive');
-          sidebarOpen = true;
-      }
-  }
+      contentDivs.forEach(function (div) {
+        div.style.display = div.id === contentId ? 'block' : 'none';
+      });
+    });
+  });
 
-  function closeSidebar() {
-      if (sidebarOpen) {
-          sidebar.classList.remove('sidebar-responsive');
-          sidebarOpen = false;
-      }
-  }
+  
 
   // BAR CHART
 
@@ -134,98 +141,124 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // AREA CHART
 
-  var areaChartoptions = {
-    series: [{
-    name: 'Rice',
-    type: 'column',
-    data: [54, 51, 30, 97, 43, 72, 67, 71, 54, 42, 50]
-  }, {
-    name: 'Sugar',
-    type: 'area',
-    data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-  }, {
-    name: 'Oil',
-    type: 'line',
-    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
-  }, {
-    name: 'Vagetable',
-    type: 'column',
-    data: [35, 55, 76, 39, 85, 55, 64, 72, 69, 26, 59]
- }],
-    chart: {
-    height: 350,
-    type: 'line',
-    stacked: false,
-  },
-  stroke: {
-    width: [0, 2, 5],
-    curve: 'smooth'
-  },
-  plotOptions: {
-    bar: {
-      columnWidth: '50%'
-    }
-  },
-  
-  fill: {
-    opacity: [0.85, 0.25, 1],
-    gradient: {
-      inverseColors: false,
-      shade: 'light',
-      type: "vertical",
-      opacityFrom: 0.85,
-      opacityTo: 0.55,
-      stops: [0, 100, 100, 100]
-    }
-  },
-  labels: ['2018', '2018', '2019', '2019', '2020', '2020', '2021',
-    '2021', '2022', '2023', '2023'],
-  markers: {
-    size: 0
-},
-  xaxis: {
-    type: 'dateyear',
-  },
-  yaxis: {
-    title: {
-      text: 'Trade',
-      style: {
-        color: "#3c3c40",
-    },
-    },
-    min: 0
-  },
-  tooltip: {
-    shared: true,
-    intersect: false,
-    y: {
-      formatter: function (y) {
-        if (typeof y !== "undefined") {
-          return y.toFixed(0) + " Trade";
-        }
-        return y;
-  
-      }
-    }
-  }
-  };
 
-  var areaChart = new ApexCharts(document.querySelector("#area-chart"), areaChartoptions);
+
+
+
+
+
+
+
+
+
+
+  var areaChartoptions = {
+    series: [],
+    chart: {
+      height: 350,
+      type: 'line',
+      stacked: false,
+    },
+    stroke: {
+      width: [0, 2, 5],
+      curve: 'smooth'
+    },
+    
+    fill: {
+      opacity: [0.85, 0.25, 1],
+      gradient: {
+        inverseColors: false,
+        shade: 'light',
+        type: 'vertical',
+        opacityFrom: 0.85,
+        opacityTo: 0.55,
+        stops: [0, 100, 100, 100]
+      },
+    },
+    labels: [], // Populate with dynamic data
+    markers: {
+      size: 0,
+    },
+    xaxis: {
+      type: 'dateyear',
+    },
+    yaxis: {
+      title: {
+        text: 'Trade',
+        style: {
+          color: '#3c3c40',
+        },
+      },
+      min: 0,
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      y: {
+        formatter: function (y) {
+          if (typeof y !== 'undefined') {
+            return y.toFixed(0) + ' Trade';
+          }
+          return y;
+        },
+      },
+    },
+  };
+  
+  var areaChart = new ApexCharts(document.querySelector('#area-chart'), areaChartoptions);
+  
+  axios.get('/api/area_chart_data')
+    .then(function (response) {
+      console.log('Response from server:', response.data);
+  
+      // Access the data from the API response
+      var data = response.data;
+  
+      // Update the labels with the years from your data
+      areaChart.updateOptions({
+        labels: data.years,
+      });
+  
+      // Create the series data for the area chart
+      var seriesData = [
+        { name: 'Rice', type: 'column', data: data.data.Rice },
+        { name: 'Sugar', type: 'area', data: data.data.Sugar },
+        { name: 'Oil', type: 'line', data: data.data.Oil },
+        { name: 'Vegetable', type: 'column', data: data.data.Vegetable },
+      ];
+      console.log(seriesData);
+
+      // Update the series data
+      areaChart.updateSeries(seriesData);
+    })
+    .catch(function (error) {
+      console.error('Error fetching area chart data:', error);
+    });
+  
   areaChart.render();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
   // RADAR AREA
 
   var radarChartoptions = {
     series: [{
-    name: 'Series 1',
-    data: [80, 50, 30, 40, 100, 20],
-  }, {
-    name: 'Series 2',
-    data: [20, 30, 40, 80, 20, 80],
-  }, {
-    name: 'Series 3',
-    data: [44, 76, 78, 13, 43, 10],
-  }],
+     
+    }],
     chart: {
     height: 350,
     type: 'radar',
@@ -251,11 +284,34 @@ document.addEventListener("DOMContentLoaded", function () {
   markers: {
     size: 0
   },
-  xaxis: {
-    categories: ['2018', '2019', '2020', '2021', '2022', '2023']
-  }
+  
   };
-
   var radarChart = new ApexCharts(document.querySelector("#radar-chart"), radarChartoptions);
-  radarChart.render();
+  axios.get('/api/radar_chart_data')
+  .then(function (response) {
+    var radarData = response.data;
+    var seriesData = [];
+
+    console.log("Radar Chart Response Data:", radarData); // Debugging
+
+    Object.keys(radarData).forEach(function(seriesName) {
+      if (Array.isArray(radarData[seriesName])) {
+        seriesData.push({
+          name: seriesName,
+          data: radarData[seriesName]
+        });
+      }
+    });
+
+    console.log("Radar Chart Series Data:", seriesData); // Debugging
+
+    radarChart.updateOptions({
+      series: seriesData
+    });
+  })
+  .catch(function(error) {
+    console.error('Error fetching radar chart data:', error);
+  });
+
+radarChart.render();
 });

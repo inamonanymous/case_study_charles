@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 
 </head>
 
@@ -57,97 +59,113 @@
                 <div class="sidebar-brand">
                     <span class="material-symbols-outlined">crowdsource</span> Farm's inventory
                 </div>
-                <span class="material-symbols-outlined" onclick="closeSidebar ()">close</span>
+                <span class="material-symbols-outlined" onclick="closeSidebar()">close</span>
             </div>
 
             <ul class="sidebar-list">
-                <li class="sidebar-list-item">
+                <li class="sidebar-list-item" data-target="dashboard-content">
                     <span class="material-symbols-outlined">search</span> Dashboard
                 </li>
                 <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined">inventory_2 </span> Products
+                    <span class="material-symbols-outlined" data-target="products-content">inventory_2 </span> Products
                 </li>
                 <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined">bar_chart</span> Report
+                    <span class="material-symbols-outlined" data-target="report-content">bar_chart</span> Report
                 </li>
                 <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined">settings</span> Settings
+                    <span class="material-symbols-outlined" data-target="settings">settings</span> Settings
                 </li>
             </ul>
         </aside>
         <!-- End Sidebar -->
 
         <!-- Main -->
+        
         <main class="main-container">
-            <div class="main-title">
-                <p class="font-weight-bold">INVENTORY</p>
+                <div id="dashboard-content" class="content-div" style="display: none;">
+                    <div class="main-title">
+                        <p class="font-weight-bold">INVENTORY</p>
+                    </div>
+        
+                    <div class="main-cards">
+        
+                        <div class="card">
+                            <div class="card-inner">
+                                <p>PRODUCTS</p>
+                                <div class=" icon icon-shape background-blue text-primary">
+                                    <span class="material-icons-outlined">inventory_2</span>
+                                </div>
+                            </div>
+                            <span class="text-primary">434</span>
+                        </div>
+        
+                        <div class="card">
+                            <div class="card-inner">
+                                <p>SALE</p>
+                                <div class=" icon icon-shape background-blue text-primary">
+                                    <span class="material-icons-outlined">add_shopping_cart</span>
+                                </div>
+                            </div>
+                            <span class="text-primary">242</span>
+                        </div>
+        
+                        <div class="card">
+                            <div class="card-inner">
+                                <p>TRADES</p>
+                                <div class=" icon icon-shape background-blue text-primary">
+                                    <span class="material-icons-outlined">agriculture</span>
+                                </div>
+                            </div>
+                            <span class="text-primary">126</span>
+                        </div>
+        
+                        <div class="card">
+                            <div class="card-inner">
+                                <p>BRGY</p>
+                                <div class=" icon icon-shape background-blue text-primary">
+                                    <span class="material-icons-outlined"> holiday_village </span>
+                                </div>
+                            </div>
+                            <span class="text-primary">942</span>
+                        </div>
+                    </div>
+        
+                    <div class="charts">
+        
+                        <div class="charts-card">
+                            <p class="chart-title">BRGY SALES</p>
+                            <div id="bar-chart"></div>
+                        </div>
+        
+                        <div class="charts-card">
+                            <p class="chart-title">Purchase and Sales Orders</p>
+                            <div id="area-chart"></div>
+                        </div>
+        
+                        <div class="charts-card">
+                            <p class="chart-title">Sale Statistics</p>
+                            <div id="radar-chart"></div>
+                        </div>
+        
+                    </div>
+                </div>
+            <div id="products-content" class="content-div" style="display: none;">
+                tanga
             </div>
-
-            <div class="main-cards">
-
-                <div class="card">
-                    <div class="card-inner">
-                        <p>PRODUCTS</p>
-                        <div class=" icon icon-shape background-blue text-primary">
-                            <span class="material-icons-outlined">inventory_2</span>
-                        </div>
-                    </div>
-                    <span class="text-primary">434</span>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <p>SALE</p>
-                        <div class=" icon icon-shape background-blue text-primary">
-                            <span class="material-icons-outlined">add_shopping_cart</span>
-                        </div>
-                    </div>
-                    <span class="text-primary">242</span>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <p>TRADES</p>
-                        <div class=" icon icon-shape background-blue text-primary">
-                            <span class="material-icons-outlined">agriculture</span>
-                        </div>
-                    </div>
-                    <span class="text-primary">126</span>
-                </div>
-
-                <div class="card">
-                    <div class="card-inner">
-                        <p>BRGY</p>
-                        <div class=" icon icon-shape background-blue text-primary">
-                            <span class="material-icons-outlined"> holiday_village </span>
-                        </div>
-                    </div>
-                    <span class="text-primary">942</span>
-                </div>
+            <div id="report-content" class="content-div" style="display: none;">
+            xcxcvb
             </div>
-
-            <div class="charts">
-
-                <div class="charts-card">
-                    <p class="chart-title">BRGY SALES</p>
-                    <div id="bar-chart"></div>
-                </div>
-
-                <div class="charts-card">
-                    <p class="chart-title">Purchase and Sales Orders</p>
-                    <div id="area-chart"></div>
-                </div>
-
-                <div class="charts-card">
-                    <p class="chart-title">Sale Statistics</p>
-                    <div id="radar-chart"></div>
-                </div>
-
+            <div id="settings-content" class="content-div" style="display: none;">
+            zzz
             </div>
         </main>
      
         <!-- End Main -->
     </div> 
+
+
+    
+
 
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
