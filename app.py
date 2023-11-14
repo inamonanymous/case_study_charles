@@ -220,6 +220,9 @@ def update_user_info(id):
 def add_product():
     if not 'username' in session:
         return jsonify({"message": "Not logged in"}), 480
+    current_user = User.query.filter_by(username=session.get('username', "")).first()
+    if not current_user.login_type == 4096 or current_user.login_type is None:
+        return jsonify({"message": "Guest users not allowed"}), 401
     if request.method=="POST":
         data = request.get_json()
         product_entry = Products(
@@ -236,6 +239,9 @@ def add_product():
 def add_location():
     if not 'username' in session:
         return jsonify({"message": "Not logged in"}), 480
+    current_user = User.query.filter_by(username=session.get('username', "")).first()
+    if not current_user.login_type == 4096 or current_user.login_type is None:
+        return jsonify({"message": "Guest users not allowed"}), 401
     if request.method=="POST":
         data = request.get_json()
         location_entry = Location(location_name=data['location_name'])
@@ -248,6 +254,9 @@ def add_location():
 def add_trade():
     if not 'username' in session:
         return jsonify({"message": "Not logged in"}), 480
+    current_user = User.query.filter_by(username=session.get('username', "")).first()
+    if not current_user.login_type == 4096 or current_user.login_type is None:
+        return jsonify({"message": "Guest users not allowed"}), 401
     if request.method=="POST":
         data = request.get_json()
         trade_entry = TradeData(
