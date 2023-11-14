@@ -66,14 +66,14 @@
                 <li class="sidebar-list-item" data-target="dashboard-content">
                     <span class="material-symbols-outlined">search</span> Dashboard
                 </li>
-                <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined" data-target="products-content">inventory_2 </span> Products
+                <li class="sidebar-list-item" data-target="products-content">
+                    <span class="material-symbols-outlined" >inventory_2 </span> Products
                 </li>
-                <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined" data-target="report-content">bar_chart</span> Report
+                <li class="sidebar-list-item" data-target="report-content">
+                    <span class="material-symbols-outlined" >bar_chart</span> Report
                 </li>
-                <li class="sidebar-list-item">
-                    <span class="material-symbols-outlined" data-target="settings">settings</span> Settings
+                <li class="sidebar-list-item" data-target="settings-content">
+                    <span class="material-symbols-outlined">settings</span> Settings
                 </li>
             </ul>
         </aside>
@@ -83,87 +83,23 @@
         
         <main class="main-container">
                 <div id="dashboard-content" class="content-div" style="display: none;">
-                    <div class="main-title">
-                        <p class="font-weight-bold">INVENTORY</p>
-                    </div>
-        
-                    <div class="main-cards">
-        
-                        <div class="card">
-                            <div class="card-inner">
-                                <p>PRODUCTS</p>
-                                <div class=" icon icon-shape background-blue text-primary">
-                                    <span class="material-icons-outlined">inventory_2</span>
-                                </div>
-                            </div>
-                            <span class="text-primary">434</span>
-                        </div>
-        
-                        <div class="card">
-                            <div class="card-inner">
-                                <p>SALE</p>
-                                <div class=" icon icon-shape background-blue text-primary">
-                                    <span class="material-icons-outlined">add_shopping_cart</span>
-                                </div>
-                            </div>
-                            <span class="text-primary">242</span>
-                        </div>
-        
-                        <div class="card">
-                            <div class="card-inner">
-                                <p>TRADES</p>
-                                <div class=" icon icon-shape background-blue text-primary">
-                                    <span class="material-icons-outlined">agriculture</span>
-                                </div>
-                            </div>
-                            <span class="text-primary">126</span>
-                        </div>
-        
-                        <div class="card">
-                            <div class="card-inner">
-                                <p>BRGY</p>
-                                <div class=" icon icon-shape background-blue text-primary">
-                                    <span class="material-icons-outlined"> holiday_village </span>
-                                </div>
-                            </div>
-                            <span class="text-primary">942</span>
-                        </div>
-                    </div>
-        
-                    <div class="charts">
-        
-                        <div class="charts-card">
-                            <p class="chart-title">BRGY SALES</p>
-                            <div id="bar-chart"></div>
-                        </div>
-        
-                        <div class="charts-card">
-                            <p class="chart-title">Purchase and Sales Orders</p>
-                            <div id="area-chart"></div>
-                        </div>
-        
-                        <div class="charts-card">
-                            <p class="chart-title">Sale Statistics</p>
-                            <div id="radar-chart"></div>
-                        </div>
-        
-                    </div>
+                    {% include "dashboard.html" %}
                 </div>
-            <div id="products-content" class="content-div" style="display: none;">
-                tanga
-            </div>
-            <div id="report-content" class="content-div" style="display: none;">
-            xcxcvb
-            </div>
-            <div id="settings-content" class="content-div" style="display: none;">
-            zzz
-            </div>
+                <div id="products-content" class="content-div" style="display: none;">
+                    {% include "products.html" %}
+                </div>
+                <div id="report-content" class="content-div" style="display: none;">
+                    {% include "reports.html" %}        
+                </div>
+                <div id="settings-content" class="content-div" style="display: none;">
+                zzz
+                </div>
         </main>
      
         <!-- End Main -->
     </div> 
 
-
+    
     
 
 

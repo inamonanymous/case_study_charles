@@ -45,51 +45,115 @@ button:hover {
     
 
 
-    <div class="content">
-        <h1>Manage Products</h1>
-        
-        <!-- Section for adding products -->
-        <div class="add-product">
-            <h2>Add Product</h2>
-            <form id="add-product-form">
-                <input type="text" placeholder="Product Name" required>
-                <input type="number" placeholder="Price" required>
-                <!-- Add other product details here -->
-                <button type="submit">Add Product</button>
-            </form>
+    <div class="content container">
+        <div class="main-title">
+            <p class="font-weight-bold h1">Manage Products</p>
         </div>
-
-        <!-- Section for listing and deleting products -->
-        <div class="delete-product">
-            <h2>Current Products</h2>
-            <ul id="product-list">
-                <!-- Product items will be listed here -->
-                <!-- Example: <li>Product Name <button>Delete</button></li> -->
-            </ul>
+    
+        <!-- Row for Add Product, Add Location, Add Trade -->
+        <div class="row">
+            <!-- Add Product Form -->
+            <div class="col-md-4 add-product">
+                <h3>Add Product</h3>
+                <form id="add-product-form" class="mb-4">
+                    <input type="text" class="form-control mb-2" placeholder="Product Name" required>
+                    <input type="text" class="form-control mb-2" placeholder="Product Description" required>
+                    <input type="text" class="form-control mb-2" placeholder="Product Unit of Measurement" required>
+                    <input type="number" class="form-control mb-2" placeholder="Price" required>
+                    <!-- Add other product details here -->
+                    <button type="submit" class="btn btn-success">Add Product</button>
+                </form>
+            </div>
+    
+            <!-- Add Location Form -->
+            <div class="col-md-4 add-location">
+                <h3>Add Location</h3>
+                <form id="add-location-form" class="mb-4">
+                    <input type="text" class="form-control mb-2" placeholder="Location Name" required>
+                    <!-- Add other location details here -->
+                    <button type="submit" class="btn btn-success">Add Location</button>
+                </form>
+            </div>
+    
+            <!-- Add Trade Form -->
+            <div class="col-md-4 add-trade">
+                <h3>Add Trade</h3>
+                <form id="add-trade-form" class="mb-4" onsubmit="event.preventDefault(); addTrade()">
+                    <label for="trade_location">Location</label>
+                    <select name="trade_location" id="trade_location" class="form-control mb-2">
+                        <option value="" selected disabled></option>
+                    </select>
+                    <label for="trade_product">Product</label>
+                    <select name="trade_product" id="trade_product" class="form-control mb-2">
+                        <option value="" selected disabled></option>
+                    </select>
+                    
+                    <input type="number" class="form-control mb-2" name="trade_year" id="trade_year" placeholder="Year" required>
+                    <input type="number" class="form-control mb-2" name="trade_quantity" id="trade_quantity" placeholder="Quantity" required>
+                    <!-- Add other trade details here -->
+                    <button type="submit" class="btn btn-success">Add Trade</button>
+                </form>
+            </div>
         </div>
-
-        <!-- Section for adding trades -->
-        <div class="add-trade">
-            <h2>Add Trade</h2>
-            <form id="add-trade-form">
-                <input type="text" placeholder="Trade Name" required>
-                <input type="number" placeholder="Quantity" required>
-                <!-- Add other trade details here -->
-                <button type="submit">Add Trade</button>
-            </form>
-        </div>
-
-        <!-- Section for listing and deleting trades -->
-        <div class="delete-trade">
-            <h2>Current Trades</h2>
-            <ul id="trade-list">
-                <!-- Trade items will be listed here -->
-                <!-- Example: <li>Trade Name <button>Delete</button></li> -->
-            </ul>
-        </div>
+    
+        <!-- Remaining content... -->
+    
     </div>
 
     <script>
-        // JavaScript for form handling and dynamic product/trade management
+        function addTrade(){
+            var locationId = document.getElementById('trade_location').value;
+            var tradeProduct = document.getElementById('trade_product').value;
+            var tradeYear = document.getElementById('trade_year').value;
+            var tradeQuantity = document.getElementById('trade_quantity').value;
+
+            var formData = {
+                'location_id': locationId,
+                'trade_product': tradeProduct,
+                'trade_year': tradeYear,
+                'trade_quantity': tradeQuantity
+            }
+
+            axios.post('/add-trade', formData).then(response => {
+                alert("Item added to Product");
+                location.reload(true);
+            }).catch(error => {
+                console.log(error.data);
+            })
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        // Fetch locations and products data
+        axios.get('/get-products-and-locations').then(response => {
+            var locationsData = response.data.locations_data;
+            var productsData = response.data.products_data;
+            
+            var locationSelect = document.getElementById('trade_location');
+            var productSelect = document.getElementById('trade_product');
+
+            // Clear existing options before adding new ones
+            locationSelect.innerHTML = '<option value="" selected disabled>Select Location</option>';
+            productSelect.innerHTML = '<option value="" selected disabled>Select Product</option>';
+
+            // Populate locations dropdown
+            locationsData.forEach(function (location) {
+                var option = document.createElement('option');
+                option.value = location.location_id;
+                option.text = location.location_name;
+                locationSelect.appendChild(option);
+            });
+
+            // Populate products dropdown
+            productsData.forEach(function (product) {
+                var option = document.createElement('option');
+                option.value = product.product_id;
+                option.text = product.product_name;
+                productSelect.appendChild(option);
+            });
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    });
+
     </script>
 
