@@ -1,0 +1,95 @@
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .settings-container {
+        max-width: 600px;
+        margin: auto;
+        margin-top: 50px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #007bff;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    input.form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    small.form-text {
+        color: #6c757d;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container settings-container">
+    <h2 class="mb-4 text-success">User Settings</h2>
+    <form id="settings-form" onsubmit="event.preventDefault(); updateUserInfo({{ current_user.user_id }})">
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" required value="{{ current_user.firstname }}">
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" name="surname" required value="{{ current_user.surname }}">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" name="phone" required value="{{ current_user.phone }}">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required value="{{ current_user.email }}">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required value="{{ current_user.username }}" readonly>
+            <small class="form-text text-muted">Username cannot be changed.</small>
+        </div>
+
+        <button type="submit" class="btn-primary">Update Information</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+
+<!-- Include your custom script for updating user information -->
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+

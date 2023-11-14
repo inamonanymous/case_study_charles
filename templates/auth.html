@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('path_to_your_ecosystem_image.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        .login-form {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-form">
+        <div class="form-container">
+            <form action="" onsubmit="event.preventDefault(); login()">
+                <h3 class="text-center text-success">Login</h3>
+                <div class="form-group">
+                    <label for="login_username">Username</label>
+                    <input type="text" class="form-control" name="login_username" id="login_username">
+                </div>
+                <div class="form-group">
+                    <label for="login_password">Password</label>
+                    <input type="password" class="form-control" name="login_password" id="login_password">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Log in</button>
+            </form>
+            <div class="text-center">
+                <label for="sign_up">Or Create a new account!</label>
+                <a href="/sign-up" id="sign_up">Sign up!</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

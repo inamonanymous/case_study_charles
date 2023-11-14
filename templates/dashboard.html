@@ -43,36 +43,37 @@
         </div>
         <span class="text-primary" id="locationCount">Loading...</span>
     </div>
+    <div class="card">
+        <div class="card-inner" id="guestCard">
+            <p>Guest Accounts</p>
+            <div class=" icon icon-shape background-blue text-primary">
+                <span class="material-icons-outlined">people_outline</span>
+            </div>
+        </div>
+        <span class="text-primary" id="guestCount">Loading...</span>
+    </div>
+    <div class="card">
+        <div class="card-inner" id="pendingCard">
+            <p>Pending Accounts</p>
+            <div class=" icon icon-shape background-blue text-primary">
+                <span class="material-icons-outlined"> error_ouline </span>
+            </div>
+        </div>
+        <span class="text-primary" id="pendingCount">Loading...</span>
+    </div>
+    <div class="card">
+        <div class="card-inner" id="adminCard">
+            <p>Admin Accounts</p>
+            <div class=" icon icon-shape background-blue text-primary">
+                <span class="material-icons-outlined"> admin_panel_settings </span>
+            </div>
+        </div>
+        <span class="text-primary" id="adminCount">Loading...</span>
+    </div>
 </div>
 
 <div class="charts">
 
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      fetchDataAndDisplay();
-  });
-
-  function fetchDataAndDisplay() {
-      axios.get('/dashboard-items')  // Replace with your actual API endpoint
-          .then(function (response) {
-              const data = response.data;
-              updateCount('productsCount', data.products_count);
-              updateCount('salesCount', data.sales_count);
-              updateCount('tradesCount', data.trades_count);
-              updateCount('locationCount', data.location_count);
-              // Add similar calls for trades and location
-          })
-          .catch(function (error) {
-              console.error('Error fetching data:', error);
-          });
-  }
-
-  function updateCount(elementId, count) {
-      const element = document.getElementById(elementId);
-      if (element) {
-          element.textContent = count;
-      }
-  }
-</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>

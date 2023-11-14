@@ -12,6 +12,16 @@ body {
     line-height: 1px;
   }
   
+  .user-name {
+    font-size: 18px; /* Adjust the font size as needed */
+    font-weight: bold; /* Optionally, make the name bold */
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+
   .text-primary {
     color: #666666;
   }

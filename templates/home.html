@@ -43,12 +43,11 @@
                 <span class="material-symbols-outlined">menu</span> 
              </div>
             <div class="header-left">
-                <span class="material-symbols-outlined">search</span>
-            </div>
-            <div class="header-right">
-                <span class="material-icons-outlined">notifications</span>
-                <span class="material-icons-outlined">email</span>
+                <span class="user-name">{{ current_user.username }}</span>
                 <span class="material-icons-outlined">account_circle</span>
+            </div>
+            <div class="header-right user-profile">
+                <a href="#" onclick="logout()"><span class="material-symbols-outlined">logout</span></a>
             </div>
         </header>
         <!-- End Header -->
@@ -67,10 +66,13 @@
                     <span class="material-symbols-outlined">search</span> Dashboard
                 </li>
                 <li class="sidebar-list-item" data-target="products-content">
-                    <span class="material-symbols-outlined" >inventory_2 </span> Products
+                    <span class="material-symbols-outlined" >database </span> Data
                 </li>
                 <li class="sidebar-list-item" data-target="report-content">
                     <span class="material-symbols-outlined" >bar_chart</span> Report
+                </li>
+                <li class="sidebar-list-item" data-target="accounts-content">
+                    <span class="material-symbols-outlined">group</span>Accounts
                 </li>
                 <li class="sidebar-list-item" data-target="settings-content">
                     <span class="material-symbols-outlined">settings</span> Settings
@@ -86,27 +88,26 @@
                     {% include "dashboard.html" %}
                 </div>
                 <div id="products-content" class="content-div" style="display: none;">
-                    {% include "products.html" %}
+                    {% include "data.html" %}
                 </div>
                 <div id="report-content" class="content-div" style="display: none;">
                     {% include "reports.html" %}        
                 </div>
+                <div id="accounts-content" class="content-div" style="display: none;">
+                    {% include "accounts.html" %}
+                </div>
                 <div id="settings-content" class="content-div" style="display: none;">
-                zzz
+                    {% include "settings.html" %}
                 </div>
         </main>
      
         <!-- End Main -->
     </div> 
-
-    
-    
-
-
+ 
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
     <!-- Custom JS -->
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 
 </html>

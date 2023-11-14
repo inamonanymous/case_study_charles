@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Add your CSS styles here to match the theme of your dashboard */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Styles for the content area */
+        .content {
+            margin-left: 50px; /* Or the width of your sidebar */
+            padding: 20px;
+        }
+
+        /* Styles for form inputs and buttons */
+        input[type="text"],
+        input[type="number"],
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #26b126; /* Bootstrap 'success' green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Hide all forms initially */
+        .form-container {
+            display: none;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 10px;
+            border: 1px solid #888;
+            width: 60%; /* Adjust the width as needed */
+            }
+
+            .close {
+            color: #aaa;
+            float: right;
+            font-size: 32px; /* Increase the font size */
+            font-weight: bold;
+            padding: 10px; /* Increase the padding for better clickability */
+            }
+
+            /* Add a bit of styling for better visibility on hover/focus */
+            .close:hover,
+            .close:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content container">
+        <div class="main-title">
+            <p class="font-weight-bold h1">Manage Data</p>
+        </div>
+
+        <!-- Dropdown to select what to manage -->
+        <div>
+            <label for="manage-selection">Select what to manage:</label>
+            <select id="manage-selection" onchange="showActionSelect()" class="form-select form-select-lg mb-3">
+                <option value="" selected disabled>Select an option</option>
+                <option value="product">Manage Products</option>
+                <option value="location">Manage Locations</option>
+                <option value="trade">Manage Trades</option>
+            </select>
+        </div>
+        <div id="action-select-container">
+            <label for="action-selection">Select action:</label>
+            <select id="action-selection" onchange="showForm()" class="form-select form-select-lg mb-3">
+                <option value="" selected disabled>Select an action</option>
+                <option value="add">Add</option>
+                <option value="edit">Edit</option>
+            </select>
+        </div>
+
+        <!-- Form containers -->
+        <div id="product-form" class="form-container">
+            <!-- Add Product Form -->
+            <div class="col-md-4 add-product">
+                <h3>Add Product</h3>
+                <form id="add-product-form" class="mb-4" onsubmit="event.preventDefault(); addProduct()">
+                    <input type="text" class="form-control mb-2" placeholder="Product Name" name="product_name" id="product_name" required>
+                    <input type="text" class="form-control mb-2" placeholder="Product Description" name="product_description" id="product_description">
+                    <input type="text" class="form-control mb-2" placeholder="Product Unit of Measurement" name="product_unit" id="product_unit" required>
+                    <!-- Add other product details here -->
+                    <button type="submit" class="btn btn-success">Add Product</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="location-form" class="form-container">
+            <!-- Add Location Form -->
+            <div class="col-md-4 add-location">
+                <h3>Add Location</h3>
+                <form id="add-location-form" class="mb-4" onsubmit="event.preventDefault(); addLocation()">
+                    <input type="text" class="form-control mb-2" placeholder="Location Name" name="location_name" id="location_name" required>
+                    <!-- Add other location details here -->
+                    <button type="submit" class="btn btn-success">Add Location</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="trade-form" class="form-container">
+            <!-- Add Trade Form -->
+            <div class="col-md-4 add-trade">
+                <h3>Add Trade</h3>
+                <form id="add-trade-form" class="mb-4" onsubmit="event.preventDefault(); addTrade()">
+                    <label for="trade_location">Location</label>
+                    <select name="trade_location" id="trade_location" class="form-control mb-2">
+                        <option value="" selected disabled></option>
+                    </select>
+                    <label for="trade_product">Product</label>
+                    <select name="trade_product" id="trade_product" class="form-control mb-2">
+                        <option value="" selected disabled></option>
+                    </select>
+                    
+                    <input type="number" class="form-control mb-2" name="trade_year" id="trade_year" placeholder="Year" required>
+                    <input type="number" class="form-control mb-2" name="trade_quantity" id="trade_quantity" placeholder="Quantity" required>
+                    <!-- Add other trade details here -->
+                    <button type="submit" class="btn btn-success">Add Trade</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Table containers -->
+        
+            <div id="product-table" class="table-container" style="display: none;">
+                <table id="products-table">
+                    <thead>
+                      <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Description</th>
+                        <th>Product Unit</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        
+        
+            <div id="location-table" class="table-container" style="display: none;">
+                <table id="locations-table">
+                    <thead>
+                      <tr>
+                        <th>Location ID</th>
+                        <th>Location Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Rows will be dynamically added here -->
+                    </tbody>
+                  </table>
+            </div>
+       
+        
+            <div id="trade-table" class="table-container" style="display: none;">
+                <table id="trade-data-table">
+                    <thead>
+                      <tr>
+                        <th>Trade ID</th>
+                        <th>Location</th>
+                        <th>Product</th>
+                        <th>Trade Year</th>
+                        <th>Trade Quantity</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        
+        <!-- Remaining content... -->
+        <div id="editProductModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeEditProductModal()">&times;</span>
+              <h3 id="productReadId">Edit Product ID: </h3>
+              <!-- Add your form fields here for editing -->
+              <label for="productReadId1">Product ID:</label>
+              <input type="text" id="productReadId1" readonly>
+              <label for="productId">Procut ID:</label>
+              <input type="text" id="productId" hidden>
+              <label for="newProductName">New Product Name:</label>
+              <input type="text" id="newProductName">
+              <label for="newProductDescription">New Product Description:</label>
+              <input type="text" id="newProductDescription">
+              <label for="newProductUnit">New Unit Measurement:</label>
+              <input type="text" id="newProductUnit">
+              <button onclick="editProduct()">Save Changes</button>
+            </div>
+          </div>
+
+        <div id="editLocationModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeEditLocationModal()">&times;</span>
+              <h3 id="locationReadId">Edit Location ID: </h3>
+              <!-- Add your form fields here for editing -->
+              <label for="locationReadId1">Product ID:</label>
+              <input type="text" id="locationReadId1" readonly>
+              <label for="locationId">Location ID:</label>
+              <input type="text" id="locationId" hidden>
+              <label for="newLocationName">New Product Name:</label>
+              <input type="text" id="newLocationName">
+              <button onclick="editLocation()">Save Changes</button>
+            </div>
+          </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/data.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
