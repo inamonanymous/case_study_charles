@@ -1,9 +1,23 @@
+function toggleFooter() {
+  const footer = document.getElementById('footer');
+  
+  // Check the current state of the footer and toggle it
+  if (footer.style.transform === 'translateY(100%)') {
+      footer.style.transform = 'translateY(0)'; // Slide in to become visible
+  } else {
+      footer.style.transform = 'translateY(100%)'; // Slide out to become non-visible
+  }
+}
 function logout(){
   if (confirm("Are you sure you want to logout?")){
     window.location.href="/";
   }
 }
 
+window.onload = function() {
+  const footer = document.getElementById('footer');
+  footer.style.transform = 'translateY(100%)'; // Ensure it starts out of view
+};
 
 function toggleSidebar() {
   var sidebar = document.getElementById('sidebar');

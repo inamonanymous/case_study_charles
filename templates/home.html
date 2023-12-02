@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Farmers Inventory</title>
 
     <!-- Lato Font -->
     <link
@@ -45,6 +45,9 @@
             <div class="header-left">
                 <span class="user-name">{{ current_user.username }}</span>
                 <span class="material-icons-outlined">account_circle</span>
+            </div>
+            <div class="header-right user-profile">
+                <a href="#" onclick="toggleFooter()"><span class="material-symbols-outlined">contact_support</span></a>
             </div>
             <div class="header-right user-profile">
                 <a href="#" onclick="logout()"><span class="material-symbols-outlined">logout</span></a>
@@ -104,6 +107,47 @@
         <!-- End Main -->
     </div> 
  
+    <div class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h1>About Us</h1>
+                <p>
+                    Welcome to Cabuyao Farmers Traders – Your Gateway to Seamless Agricultural Transactions!
+
+                    Our Mission
+                    At Cabuyao Farmers Trading, we are on a mission to help revolutionize the products of farmers. Our platform serves as an effective marketplace where farmers, traders, and consumers meet to speed up their search for high and low sales of their products in the barangay. We believe in empowering agricultural communities by providing them with a digital space to connect, collaborate, and thrive.
+
+                    Who We Are
+                    We are a dedicated team with a passion for agriculture and technology. Our diverse backgrounds in agriculture, software development, and business drive our commitment to creating a platform that addresses the unique challenges faced by those involved in the agricultural supply chain.
+
+                    What Sets Us Apart
+                    Transparency: We prioritize transparency for every trader who uses this application to help guide them in trading. Our platform provides real-time information, ensuring that all parties involved have access to fair and accurate data.
+
+                    User-Friendly Interface: Cabuyao Farmers Trading is designed with simplicity in mind. We aim to make the trading process easy and accessible for everyone, from seasoned traders to farmers entering the digital marketplace for the first time.
+
+                    Community-Centric Approach: We value community building.  Cabuyao Farmers Trading is not just a platform; it's a community where individuals and businesses come together to share knowledge, experiences, and opportunities.
+
+                    How It Works
+                    Create Your Account: Join our growing community by creating your account. Whether you're a farmer, trader, or buyer, our platform is designed to cater to your unique needs.
+
+                    Explore Trading Opportunities: Browse through a diverse range of trading opportunities. From crops find the perfect match for your agricultural products.
+
+                    Connect and Trade: Engage with other users, negotiate terms, and close deals seamlessly. Our platform facilitates secure transactions and ensures a fair exchange for all.
+
+                    Join Us in Cultivating Success
+                    Cabuyao Farmers Trading is more than just a platform; it's a shared vision for a thriving and sustainable agricultural ecosystem. Join us on this journey to cultivate success, empower communities, and reshape the future of agricultural trade.
+
+                    Ready to trade smarter? Create your account and become part of the Agriculture Trading Hub community today!
+                </p>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div>
+            <p style="font-size: 0.8em;">&copy; 2023 Farmers Inventory. All rights reserved.</p>
+        </div>
+    </div>
+
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
     <!-- Custom JS -->

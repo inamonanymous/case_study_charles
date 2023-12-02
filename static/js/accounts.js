@@ -24,10 +24,15 @@ function populateUsersTable(users) {
             <td>${user.location_id}</td>
             <td>${user.email}</td>
             <td>${getLoginTypeText(user.login_type)}</td>
-            <td><button onclick="verifyUser(${user.user_id})">Verify</button></td>
-            <td><button onclick="deleteUser(${user.user_id})">Delete</button></td>
+            <td>
+                ${getLoginTypeText(user.login_type) === 'UNVERIFIED' ?  
+                    `<button onclick="verifyUser(${user.user_id})">Verify</button>` : 
+                    '<button class="btn btn-warning" disabled>Not Available</button>'}
+            <button onclick="deleteUser(${user.user_id})">Delete</button>
+            </td>
         `;
     });
+    
 }
 
 function verifyUser(id){
