@@ -196,66 +196,8 @@ var barChartoptions = {
 
   // RADAR AREA
 
-  var radarChartoptions = {
-  series: [], // Initially empty, will be populated with data from the API
-  chart: {
-    height: 350,
-    type: 'radar',
-    dropShadow: {
-      enabled: true,
-      blur: 1,
-      left: 1,
-      top: 1
-    }
-  },
-  title: {
-    text: 'Statistic of Sales Volume by Product',
-    style: {
-      colors: "#f5f7ff",
-    },
-  },
-  stroke: {
-    width: 2
-  },
-  fill: {
-    opacity: 0.1
-  },
-  markers: {
-    size: 0
-  },
-  xaxis: {
-    categories: ['Sales Volume'] // Categories for radar chart (if you have more metrics, add them here)
-  }
-};
 
 // Initialize the radar chart
-var radarChart = new ApexCharts(document.querySelector("#radar-chart"), radarChartoptions);
 
-// Fetch the data using Axios and update the radar chart
-axios.get('/api/radar_chart_data')
-  .then(function (response) {
-    var radarData = response.data;
-    console.log("Radar Chart Response Data:", radarData); // Debugging
-
-    // Convert string values to integers
-    var numericData = radarData.series.map(function (serie) {
-      return {
-        name: serie.name,
-        data: serie.data.map(Number) // Convert string values to numbers
-      };
-    });
-
-    // Update the radar chart with the fetched data
-    radarChart.updateSeries(numericData);
-    radarChart.updateOptions({
-      xaxis: {
-        categories: radarData.categories // This will be your products or metrics
-      }
-    });
-  })
-  .catch(function(error) {
-    console.error('Error fetching radar chart data:', error);
-  });
 
 // Render the radar chart
-radarChart.render();
